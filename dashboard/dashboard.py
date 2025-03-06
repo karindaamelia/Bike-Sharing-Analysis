@@ -5,6 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.colors as mcolors
+import os
 import warnings
 
 from streamlit_option_menu import option_menu
@@ -12,9 +13,22 @@ from streamlit_option_menu import option_menu
 # Menonaktifkan warnings
 warnings.filterwarnings("ignore")
 
-# Load dataset
-hour_df = pd.read_csv("hour.csv")
-day_df = pd.read_csv("day.csv")
+# Mendapatkan path absolut dari direktori saat ini
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Load dataset dengan path relatif dari direktori saat ini
+try:
+    # Coba metode 1: Menggunakan path relatif ke file script
+    hour_df = pd.read_csv(os.path.join(current_dir, "hour.csv"))
+    day_df = pd.read_csv(os.path.join(current_dir, "day.csv"))
+except FileNotFoundError:
+    try:
+        hour_df = pd.read_csv("./hour.csv")
+        day_df = pd.read_csv("./day.csv")
+    except FileNotFoundError:
+        # Coba metode 3: File mungkin berada di direktori parent
+        hour_df = pd.read_csv("../hour.csv")
+        day_df = pd.read_csv("../day.csv")
 
 # Outlier
 Q1 = hour_df["cnt"].quantile(0.25)
