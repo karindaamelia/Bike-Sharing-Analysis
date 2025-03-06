@@ -13,8 +13,8 @@ from streamlit_option_menu import option_menu
 warnings.filterwarnings("ignore")
 
 # Load dataset
-hour_df = pd.read_csv("../data/hour.csv")
-day_df = pd.read_csv("../data/day.csv")
+hour_df = pd.read_csv("hour.csv")
+day_df = pd.read_csv("day.csv")
 
 # Outlier
 Q1 = hour_df["cnt"].quantile(0.25)
