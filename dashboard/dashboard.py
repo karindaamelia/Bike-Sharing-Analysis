@@ -16,6 +16,7 @@ warnings.filterwarnings("ignore")
 # Mendapatkan path absolut dari direktori saat ini
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
+# Memuat dataset di streamlit cloud
 # Load dataset dengan path relatif dari direktori saat ini
 try:
     # Coba metode 1: Menggunakan path relatif ke file script
